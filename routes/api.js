@@ -22,4 +22,10 @@ router.get('/timestamp/:date_string', function(req, res, next) {
     res.json(response);
 });
 
+router.get('/test', function(req, res) {
+    console.log('received request for test');
+    var response = {status: true};
+    res.json(response);
+})
+
 module.exports = router;
