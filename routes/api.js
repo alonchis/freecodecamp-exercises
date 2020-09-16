@@ -7,7 +7,7 @@ let timestampRgx = new RegExp(/\d+/);
 router.get('/timestamp', function(req, res) {
     var time = (new Date()).getTime();
     var utcTimestamp = (new Date(time)).toUTCString();
-    var response = {timestamp: time, utc: utcTimestamp};
+    var response = {unix: time, utc: utcTimestamp};
     console.log('received request for current timestamp: ' + response);
     res.json(response);
 });
