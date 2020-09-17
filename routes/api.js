@@ -4,7 +4,7 @@ const expressValidator = require('express-validator')
 let dateRgx = new RegExp(/\d{4}-\d{2}-\d{2}/);
 let timestampRgx = new RegExp(/\d+/);
 
-router.get('/timestamp', function(req, res) {
+router.get('/timestamp', function (req, res) {
     var time = (new Date()).getTime();
     var utcTimestamp = (new Date(time)).toUTCString();
     var response = {unix: time, utc: utcTimestamp};
@@ -12,7 +12,7 @@ router.get('/timestamp', function(req, res) {
     res.json(response);
 });
 
-router.get('/timestamp/:date_string', function(req, res, next) {
+router.get('/timestamp/:date_string', function (req, res, next) {
     var time;
     var dateString = req.params.date_string;
 
@@ -33,10 +33,21 @@ router.get('/timestamp/:date_string', function(req, res, next) {
     res.json(response);
 });
 
-router.get('/test', function(req, res) {
+router.get('/test', function (req, res) {
     console.log('received request for test');
     var response = {status: true};
     res.json(response);
-})
+});
+
+router.get('/whoami', function (req, res) {
+    var obj = {
+        ipaddress: req.headers["host"],
+        language: req.headers["accept-language"],
+        software: req.headers["user-agent"]
+    };
+
+    console.log("received request for whoami from " + req.headers["host"]);
+    res.json(obj);
+});
 
 module.exports = router;
