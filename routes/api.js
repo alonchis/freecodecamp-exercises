@@ -41,7 +41,7 @@ router.get('/test', function (req, res) {
 
 router.get('/whoami', function (req, res) {
     var obj = {
-        ipaddress: req.headers["host"],
+        ipaddress: req.socket._peername.address,
         language: req.headers["accept-language"],
         software: req.headers["user-agent"]
     };
